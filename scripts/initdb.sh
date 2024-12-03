@@ -15,4 +15,5 @@ initdb -D $PGDATA --encoding=$PGCHARSET --locale=$PGLOCALE --auth-host=md5 --aut
 cp $CONF/*.conf $PGDATA
 cd $PGDATA && pg_ctl start -D .
 
-psql -U postgres1 -p 9468 -d postgres -f $CONF/script.sql
+psql -U postgres1 -p 9468 -d postgres 
+psql -U newrole -d coolyellowsoup -p 9468 -h localhost
