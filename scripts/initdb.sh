@@ -16,4 +16,3 @@ cp $CONF/*.conf $PGDATA
 cd $PGDATA && pg_ctl start -D .
 
 psql -U postgres1 -p 9468 -d postgres 
-psql -U newrole -d coolyellowsoup -p 9468 -h localhost
