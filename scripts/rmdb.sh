@@ -1,6 +1,5 @@
 #!/bin/bash
-
 cd $PGDATA && pg_ctl stop -D .
-rm -rf $HOME/ado23
-rm -rf $HOME/ipl2
-clear
+rm -rf $DBMS_ROOT/node/rvh63
+rm -rf $DBMS_ROOT/node/cln78
+echo "Очистка кластера завершена"

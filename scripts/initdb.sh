@@ -1,18 +1,25 @@
 #!/bin/bash
 
-export PGDATA="$HOME/ado23"
-export PGCHARSET="ISO_8859_5"
-export PGLOCALE="ru_RU.ISO8859-5"
-export CONF="$HOME/conf"
+# Этап 1: Инициализация кластера БД
+export DBMS_ROOT="/Users/aleksandrbabushkin/ITMO/s7-dbms-lab2"
+export PGDATA="$DBMS_ROOT/node/rvh63"
+export PGENCODING="KOI8-R"
+export PGLOCALE="ru_RU.KOI8-R"
 
+# Создаем директории
 mkdir -p $PGDATA
-mkdir $HOME/ipl2
+mkdir -p $DBMS_ROOT/node/cln78
 
-initdb -D $PGDATA --encoding=$PGCHARSET --locale=$PGLOCALE --auth-host=md5 --auth-local=peer
- 
+# Инициализируем кластер
+initdb -D $PGDATA --encoding=$PGENCODING --locale=$PGLOCALE --auth-host=scram-sha-256 --auth-local=peer
 
+echo "Кластер БД инициализирован в $PGDATA"
 
-cp $CONF/*.conf $PGDATA
+# Копируем подготовленные конфиги (предполагается, что они лежат в текущей директории)
+cp $DBMS_ROOT/configuration/postgresql.conf $PGDATA/
+cp $DBMS_ROOT/configuration/pg_hba.conf $PGDATA/
+
+# Запускаем сервер
 cd $PGDATA && pg_ctl start -D .
 
-psql -U postgres1 -p 9468 -d postgres 
+echo "Сервер БД запущен на порту 9414."
